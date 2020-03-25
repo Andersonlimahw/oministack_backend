@@ -2,8 +2,8 @@ const connection = require('../database/connection');
 
 module.exports = {
     async create(request, response) {
-        // ong_id, será obtido via id
-        const { title, description, value } = request.body; // destructing pra registrar apenas valores desejados
+        // destructing pra registrar apenas valores desejados
+        const { title, description, value } = request.body;
         const ong_id = request.headers.authorization;
         const [id] = await connection('incidents').insert({
             title, 
@@ -19,13 +19,31 @@ module.exports = {
         });
     }, 
     async index(request, response) {
-        const ongs = await connection('incidents').select('*');
-        return response.json(ongs);
+        const { page = 1} = request.query;
+
+        const [count] = await connection('incidents').count();
+        const incidents = await connection('incidents')
+            .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+            .limit(5)
+            .offset((page - 1) * 5)
+            .select(['incidents.*',
+                'ongs.name as ong_name', 
+                'ongs.email as ong_email', 
+                'ongs.whatsapp as ong_whatsapp', 
+                'ongs.city as ong_city', 
+                'ongs.uf as onguf'
+            ]);
+
+        response.header('X-Total-Count', count['count(*)']);
+        return response.json(incidents);
     }, 
     async getById(request, response) {
         const { id } = request.params;
-        const ongById = await  connection('incidents').select('*').where('id',id);
-        return response.json(ongById[0]);
+        const incident = await  connection('incidents')
+            .select('*')
+            .where('id',id)
+            .first();
+        return response.json(incident);
     },
     async delete(request, response) {
         const { id } = request.params;

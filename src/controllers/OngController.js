@@ -27,9 +27,10 @@ module.exports = {
     }, 
     async getById(request, response) {
         const { id } = request.params;
-        const ongById = await  connection('ongs')
+        const ong = await  connection('ongs')
             .select('*')
-            .where('id', id);
-        return response.json(ongById[0]);
+            .where('id', id)
+            .first();
+        return response.json(ong);
     }
 }
