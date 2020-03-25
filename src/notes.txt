@@ -22,3 +22,17 @@
  * Query Builder: table('users').select(*).where();
  * ferramenta utilizada knex.js, query builder
  */
+
+ ----
+ Entidades:
+    Ong
+    Caso (Incident)
+Funcionalides:
+ - Login de Ong
+ - Logout de Ong
+ - Cadastro de Ong
+ - Listar casos específicos de uma Ong
+ - Cadastrar novos casos
+ - Deletar casos
+ - Listar todos os casos
+ - Entrar em contato com a ong
