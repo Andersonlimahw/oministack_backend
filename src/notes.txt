@@ -1,0 +1,24 @@
+
+/**
+ * Métodos HTTP:
+ * GET: Retornar informações, app.get();
+ * POST: Criar informações
+ * PUT: Alterar informações
+ * DELETE: Remover informações
+ */
+
+/**
+ * Tipos de params:
+ * Query Parameters: param enviado na rota após  ? ex: users?name=Luke, acessado em request.query, params nomeados
+ * Route Parameters: param envia via roda ex: users/:id, tem que ter os dois pontos. acessado em request.params
+ * Request Body: payload enviado na request, acesso via request body
+ */
+
+/**
+ * Bancos de dados:]
+ * SQL: banco utilizado SQLITE, não é necessário instalação pois fica salvo num arquivo.
+ * Estratégias:
+ * Driver: SELECT * FROM users
+ * Query Builder: table('users').select(*).where();
+ * ferramenta utilizada knex.js, query builder
+ */
