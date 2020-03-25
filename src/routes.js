@@ -1,51 +1,29 @@
 const express = require('express');
-const crypto = require('crypto');
+const  OngController = require('./controllers/OngController');
+const IncidentsController = require('./controllers/IncidentController');
 
-const connection = require('./database/connection');
+const ProfileController = require('./controllers/ProfileController');
+
+const SessionController = require('./controllers/SessionController');
 
 const routes = express.Router();
 
-routes.get('/ongs',(request, response) => {
-    return response.json([{
-        name: 'Anderson Lima', 
-        site: 'andersonlima.com.br'
-        }
-  ]);
-});
+routes.post('/sessions', SessionController.create);
 
-routes.get('/ongs/:id', (request, response) => {
-    return response.json({
-        id: 1,
-        name: 'Anderson Lima', 
-        site: 'andersonlima.com.br'
-    });
-});
+routes.get('/ongs', OngController.index);
 
-routes.post('/ongs', async (request, response) => {
-    const { name, email, whatsapp, city, uf } = request.body; // destructing pra registrar apenas valores desejados
-    const id =  crypto.randomBytes(4).toString('HEX');
+routes.get('/ongs/:id', OngController.getById);
 
-    await connection('ongs').insert({
-        id, 
-        name, 
-        email, 
-        whatsapp,
-        city, 
-        uf
-    });
+routes.post('/ongs', OngController.create);
 
-    return response.json({
-        id: id,
-        code: 200,
-        message: `Ong salva com sucesso!`
-    });
-});
+routes.get('/incidents', IncidentsController.index);
 
-routes.put('/ongs/:id', () => {
-    return response.json({
-        success: true, 
-        message: `${request.params.id}, atualizado com sucesso!`
-    });
-});
+routes.get('/incidents/:id', IncidentsController.getById);
+
+routes.post('/incidents', IncidentsController.create);
+
+routes.delete('/incidents/:id', IncidentsController.delete);
+
+routes.get('/profile', ProfileController.index);
 
 module.exports = routes;
