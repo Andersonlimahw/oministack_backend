@@ -24,8 +24,6 @@ routes.post('/incidents', IncidentsController.create);
 
 routes.delete('/incidents/:id', IncidentsController.delete);
 
-routes.delete('/incidents', IncidentsController.deleteAll);
-
 routes.get('/profile', ProfileController.index);
 
 module.exports = routes;
