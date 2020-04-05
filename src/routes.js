@@ -1,5 +1,5 @@
 const express = require('express');
-const  OngController = require('./controllers/OngController');
+const OngController = require('./controllers/OngController');
 const IncidentsController = require('./controllers/IncidentController');
 
 const ProfileController = require('./controllers/ProfileController');
@@ -23,6 +23,8 @@ routes.get('/incidents/:id', IncidentsController.getById);
 routes.post('/incidents', IncidentsController.create);
 
 routes.delete('/incidents/:id', IncidentsController.delete);
+
+routes.delete('/incidents', IncidentsController.deleteAll);
 
 routes.get('/profile', ProfileController.index);
 

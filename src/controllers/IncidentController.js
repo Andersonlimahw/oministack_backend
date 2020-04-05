@@ -57,5 +57,11 @@ module.exports = {
         }
         await connection('incidents').where('id', id).delete();
         return response.status(204).send();
+    },
+
+    async deleteAll(request, response){
+        console.log('#warning, removing all incidents');
+        await connection('incidents').delete();
+        return response.status(204).send();
     }
 }
