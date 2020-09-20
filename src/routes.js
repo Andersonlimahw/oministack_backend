@@ -39,7 +39,13 @@ routes.get('/incidents', celebrate({
 
 routes.get('/incidents/:id', IncidentsController.getById);
 
-routes.post('/incidents', IncidentsController.create);
+routes.post('/incidents', celebrate({
+    [Segments.BODY] : Joi.object().keys({
+        title: Joi.string().required(), 
+        description:  Joi.string().required(), 
+        value:  Joi.number().greater(0).required()
+    })
+}), IncidentsController.create);
 
 routes.delete('/incidents/:id', celebrate({
     [Segments.PARAMS]: Joi.object({
