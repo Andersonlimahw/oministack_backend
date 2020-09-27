@@ -1,10 +1,11 @@
 const connection = require('../database/connection');
 const crypto = require('crypto');
+const genereateUniqueId = require('../utils/generateUniqueId');
 
 module.exports = {
     async create(request, response) {
         const { name, email, whatsapp, city, uf } = request.body; // destructing pra registrar apenas valores desejados
-        const id =  crypto.randomBytes(4).toString('HEX');
+        const id =  genereateUniqueId();
     
         await connection('ongs').insert({
             id, 
