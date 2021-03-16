@@ -23,6 +23,7 @@
   - [KNEXJS](http://knexjs.org)
   - [SQLITE3](https://www.npmjs.com/package/sqlite3)
   - [NODEMON](https://nodemon.io)
+  - [REDIS](https://redis.io)
 
  ## Começando
   Para começar a utilizar este projeto basta clonar o repositório e executar npm install ou yarn install

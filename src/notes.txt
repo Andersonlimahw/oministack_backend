@@ -36,3 +36,11 @@ Funcionalides:
  - Deletar casos
  - Listar todos os casos
  - Entrar em contato com a ong
+
+ Executar migrations :
+ 
+ up: 
+ npx knex migrate:latest
+
+ down: 
+ npx knex migrate:roolback
